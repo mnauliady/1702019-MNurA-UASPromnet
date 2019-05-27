@@ -43,6 +43,9 @@
 					<div class="col-sm-6">
 						<h2>Data Penjualan</h2>
 					</div>
+					<div class="col-sm-6">
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>Add Penjualan</span></a>
+					</div>
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
@@ -85,7 +88,6 @@
 							<td><?php echo $key->cicilan_total; ?></td>
 							<td>
 								<a href="#deleteEmployeeModal<?php echo $key->id_penjualan;?>" class="delete" data-toggle="modal">Delete</a>
-								<a href="#editEmployeeModal<?php echo $key->id_penjualan;?>" class="delete" data-toggle="modal">Update</a>
 							</td>
 						</tr>
 						<?php
@@ -99,6 +101,80 @@
 		</div>
 	</div>
 
+	<!-- Edit Modal HTML -->
+	<div id="addEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="<?php echo site_url('C_Motor/add'); ?>" method="post">
+					<div class="modal-header">
+						<h4 class="modal-title">Add Penjualan</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>ID Motor</label>
+							<input type="text" name="id_motor" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>ID Cicil</label>
+							<input type="text" name="id_cicil" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>ID Uang Muka</label>
+							<input type="text" class="form-control" name="id_uang_muka" required>
+						</div>
+						<div class="form-group">
+							<label>Cicilan Pokok</label>
+							<input type="text" name="cicilan_pokok" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Cicilan Bunga</label>
+							<input type="text" name="cicilan_bunga" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Cicilan Total</label>
+							<input type="text" name="cicilan_total" class="form-control" required>
+						</div>						
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input id="tombol" type="submit" class="btn btn-success" value="Add">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Delete Modal HTML -->
+	<?php
+	foreach($penjualan->data->terjual as $key){
+
+		?>
+		<div id="deleteEmployeeModal<?php echo $key->id_penjualan;?>" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form action="<?php echo site_url('C_Motor/delete/'.$key->id_penjualan); ?>" method="POST">
+						<div class="modal-header">
+							<h4 class="modal-title">Delete Penjualan</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to delete these Records?</p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	<?php } ?>
 
 
 
